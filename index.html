@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>8th Grade Science Research Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; background: #f4f4f4; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; }
+        .question { margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+        button { background: #28a745; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Science Research Challenge</h1>
+        <p>Test your knowledge on Biology, Physics, Chemistry, and Earth Science!</p>
+        <div id="quiz-container"></div>
+        <button onclick="calculateScore()">Submit Quiz</button>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "Which variable is changed by the scientist in an experiment?", a: "Independent Variable", options: ["Dependent Variable", "Independent Variable", "Control", "Hypothesis"] },
+            { q: "What is the standard unit of force?", a: "Newton", options: ["Joule", "Watt", "Newton", "Pascal"] },
+            // Add more questions here...
+        ];
+
+        const container = document.getElementById('quiz-container');
+        questions.forEach((item, index) => {
+            let html = `<div class="question"><p><strong>${index + 1}. ${item.q}</strong></p>`;
+            item.options.forEach(opt => {
+                html += `<input type="radio" name="q${index}" value="${opt}"> ${opt}<br>`;
+            });
+            html += `</div>`;
+            container.innerHTML += html;
+        });
+
+        function calculateScore() {
+            let score = 0;
+            questions.forEach((item, index) => {
+                const selected = document.querySelector(`input[name="q${index}"]:checked`);
+                if (selected && selected.value === item.a) score++;
+            });
+            document.getElementById('result').innerText = `You scored ${score} out of ${questions.length}!`;
+        }
+    </script>
+</body>
+</html>8
